@@ -1,0 +1,133 @@
+# VelaNova Voice Configuration - v3 Consolidated (Phase H)
+version: v3.1-phase-h
+
+# System mode
+system:
+  mode: mic
+  profile: production
+  locale: en_US
+  timezone: Africa/Johannesburg
+
+# Wake word detection
+wake:
+  mode: mic
+  engine: openwakeword
+  model_path: /home/pudding/Projects/VelaNova/models/wake
+  phrases:
+    - hey mycroft
+    - hey jarvis
+    - alexa
+  stop_phrase: go to sleep
+  sensitivity: 0.0005
+  trigger_debounce_ms: 1500
+
+# Speech-to-Text
+stt:
+  model: distil-medium.en
+  device: cuda
+  compute_type: int8_float16
+  beam_size: 1
+  language: en
+  initial_prompt: "Durban, South Africa. Bailey speaking."
+
+# Text-to-Speech
+tts:
+  engine: piper
+  piper_bin: /home/pudding/Projects/VelaNova/.venv/bin/piper
+  voice_path: /home/pudding/Projects/VelaNova/models/piper/en/en_GB/cori/high/en_GB-cori-high.onnx
+  player_bin: aplay
+  streaming: true
+  chunk_chars: 120
+  grace_after_ms: 6000
+  # Phase G Streaming Parameters
+  linger_ms: 150
+  crossfade_ms: 60
+  max_queue: 3
+  earcon_if_ttfa_ms: 450
+
+# Language Model - Phase H Enhanced Model Routing
+llm:
+  # Primary model for general reasoning (Phase H)
+  model: deepseek-r1:7b
+
+  # Lightweight fallback for simple queries (Phase H)
+  fallback_model: llama3.2:3b
+
+  # Creative tasks (can use primary or specify different)
+  creative_model: deepseek-r1:7b
+
+  host: http://127.0.0.1:11434
+  timeout_s: 45.0  # Increased from 20.0 to handle 7B model latency
+  max_context_turns: 5
+
+# Orchestrator
+orchestrator:
+  mode: mic
+  vad_threshold: 0.02
+  silence_duration: 2.5
+  conversation_timeout_s: 30
+
+# Memory - Enhanced Phase D Configuration
+memory:
+  enabled: true
+  max_history: 100
+  embedding_model: all-MiniLM-L6-v2
+
+  # Session Management (Phase D)
+  session_timeout_hours: 24
+  session_resume_enabled: true
+
+  # Semantic Search (Phase D)
+  semantic_threshold: 0.35
+  semantic_search_limit: 5
+
+  # Context Management (Phase D)
+  max_context_turns: 5
+  context_include_semantic: true
+
+  # Maintenance (Future Phase I)
+  cleanup_enabled: false
+  cleanup_age_days: 90
+  max_sessions: 100
+
+# Developer mode - Phase H Enhanced Coder Model
+dev:
+  enabled: true
+  coder_model: deepseek-coder:6.7b
+
+# Security
+connected:
+  enabled: false
+
+security:
+  egress_block_expected: true
+
+# Identity and System Prompt
+assistant:
+  name: VelaNova
+  short_name: Nova
+  identity: |
+    You are Nova, an advanced offline voice assistant helping Bailey.
+    
+    CRITICAL RULES:
+    - Keep responses SHORT: 1-2 sentences maximum unless asked for detail
+    - For yes/no questions: Answer YES or NO first, then brief explanation if needed
+    - Never repeat information the user already knows
+    - Never introduce yourself unless directly asked your name
+    
+    Behavior guidelines:
+    - Be helpful, concise, and personable
+    - Prioritize clarity and accuracy
+    - Operate entirely offline and respect user privacy
+    
+    Only if asked your name: "I'm VelaNova, but you can call me Nova."
+  capabilities:
+    - Natural conversation
+    - Code assistance (Python, JavaScript, SQL, etc.)
+    - Creative writing
+    - System commands (time, date, status)
+    - Memory-based context awareness
+
+# Logging configuration
+logging:
+  debug: true

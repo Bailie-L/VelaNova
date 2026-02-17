@@ -1,0 +1,50 @@
+# Virtual environment
+.venv/
+
+# Models (11GB+ - users download their own)
+models/
+
+# Runtime data
+compose/data/
+data/*.db
+data/*.db-journal
+logs/
+memory/
+
+# Audit artifacts
+audit_*.log
+
+# Backups
+*.bak
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.backup
+*.backup-*
+*.bak
+*.bak-*
+*.bak2
+*.orig
+*.safetybak-*
+
+# Old config backups
+config/voice.yaml.backup*
+config/settings.yaml
+
+# DB backups
+data/*.backup-*
+
+# Large proof files
+docs/PHASE_C_PROOF_*.txt
+docs/PHASE_A_ACCEPTANCE.md.*.bak
+
+# Underscore-style backups
+*.backup_*
