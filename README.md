@@ -22,16 +22,34 @@ VelaNova is a privacy-first voice assistant that runs entirely on your hardware.
 - **Chain-of-Thought Filtering** — Strips internal reasoning tokens before speech output
 
 ## Architecture
-Microphone → OpenWakeWord → faster-whisper (CUDA) → Intent Router
-↓
-┌─────────────┼─────────────┐
-↓             ↓             ↓
-DeepSeek-R1    DeepSeek-Coder  Llama 3.2
-(7B)           (6.7B)         (3B)
-↓             ↓             ↓
-└─────────────┼─────────────┘
-↓
-Memory Store ← LLM Response → Piper TTS → Speaker
+
+````mermaid
+graph TD
+    MIC[🎤 Microphone] --> OWW[OpenWakeWord<br/>Wake Detection]
+    OWW -->|"hey mycroft / hey jarvis / alexa"| WHI[faster-whisper<br/>CUDA-Accelerated STT]
+    WHI --> IR[Intent Router<br/>Pattern Matching]
+    
+    IR -->|General| DS7[DeepSeek-R1<br/>7B Reasoning]
+    IR -->|Code| DSC[DeepSeek Coder<br/>6.7B Generation]
+    IR -->|Fallback| LL3[Llama 3.2<br/>3B Lightweight]
+    
+    DS7 --> RP[Response Processing<br/>Strip think tags]
+    DSC --> RP
+    LL3 --> RP
+    
+    RP --> MEM[(SQLite FTS5 +<br/>MiniLM-L6-v2<br/>Semantic Memory)]
+    RP --> TTS[Piper TTS<br/>Streaming Synthesis]
+    TTS --> SPK[🔊 Speaker]
+    
+    MEM -.->|Context Retrieval| IR
+    
+    style MIC fill:#4a9eff,color:#fff
+    style SPK fill:#4a9eff,color:#fff
+    style DS7 fill:#ff6b6b,color:#fff
+    style DSC fill:#ffa94d,color:#fff
+    style LL3 fill:#69db7c,color:#fff
+    style MEM fill:#b197fc,color:#fff
+```
 
 ## Hardware Requirements
 
