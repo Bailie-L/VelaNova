@@ -31,10 +31,9 @@ import sys
 import tempfile
 import threading
 import time
-import wave
 from collections import deque
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Deque
 
@@ -1098,7 +1097,7 @@ class TTS:
                         # Cleanup
                         try:
                             os.unlink(wav_file)
-                        except:
+                        except Exception:
                             pass
 
                         playback_queue.task_done()

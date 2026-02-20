@@ -1,5 +1,6 @@
 from memory_store import ensure_doc, add_chunk, build_context, DB_PATH
-import sqlite3, time
+import sqlite3
+import time
 
 DOC_ID = "phase_d_selftest"
 

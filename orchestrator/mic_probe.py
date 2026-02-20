@@ -4,7 +4,10 @@ VelaNova Phase C — Mic Probe
 - Records 5s @16k mono -> logs/mic_probe.wav
 - Prints RMS/peak and transcribes (CPU int8)
 """
-import json, time, numpy as np, sounddevice as sd, soundfile as sf
+import json
+import numpy as np
+import sounddevice as sd
+import soundfile as sf
 from pathlib import Path
 from faster_whisper import WhisperModel
 

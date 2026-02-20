@@ -1,3 +1,5 @@
+[![CI](https://github.com/Bailie-L/VelaNova/actions/workflows/ci.yml/badge.svg)](https://github.com/Bailie-L/VelaNova/actions/workflows/ci.yml)
+
 # VelaNova 🎙️
 
 **Fully offline voice assistant powered by local LLMs — no cloud, no telemetry, no compromise.**

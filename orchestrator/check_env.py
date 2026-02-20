@@ -4,7 +4,9 @@ VelaNova Phase C — Environment Checker
 Reports: deps, binaries, model files, config, and local LLM reachability.
 """
 from __future__ import annotations
-import sys, json, shutil
+import sys
+import json
+import shutil
 from pathlib import Path
 
 def try_import(name: str) -> bool:
