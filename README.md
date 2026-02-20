@@ -23,7 +23,7 @@ VelaNova is a privacy-first voice assistant that runs entirely on your hardware.
 
 ## Architecture
 
-````mermaid
+```mermaid
 graph TD
     MIC[🎤 Microphone] --> OWW[OpenWakeWord<br/>Wake Detection]
     OWW -->|"hey mycroft / hey jarvis / alexa"| WHI[faster-whisper<br/>CUDA-Accelerated STT]
@@ -50,6 +50,7 @@ graph TD
     style LL3 fill:#69db7c,color:#fff
     style MEM fill:#b197fc,color:#fff
 ```
+
 
 ## Hardware Requirements
 
