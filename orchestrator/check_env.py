@@ -16,7 +16,7 @@ def try_import(name: str) -> bool:
     except Exception:
         return False
 
-BASE = Path("~/Projects/VelaNova").expanduser()
+BASE = Path(__file__).resolve().parent.parent
 CFG  = BASE / "config/voice.yaml"
 
 report = {

@@ -11,7 +11,7 @@ import soundfile as sf
 from pathlib import Path
 from faster_whisper import WhisperModel
 
-BASE = Path.home() / "Projects/VelaNova"
+BASE = Path(__file__).resolve().parent.parent
 SAMPLE_RATE = 16000
 SECONDS = 5
 WAV = BASE / "logs/mic_probe.wav"

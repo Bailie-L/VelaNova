@@ -102,11 +102,12 @@ except ImportError:
 # Config & Logging
 # =========================
 
-CONFIG_PATH = Path("~/Projects/VelaNova/config/voice.yaml").expanduser()
-LOG_DIR = Path("~/Projects/VelaNova/logs").expanduser()
-DATA_DIR = Path("~/Projects/VelaNova/data").expanduser()
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+CONFIG_PATH = PROJECT_ROOT / "config" / "voice.yaml"
+LOG_DIR = PROJECT_ROOT / "logs"
+DATA_DIR = PROJECT_ROOT / "data"
 MEMORY_DB = DATA_DIR / "memory.db"
-MODELS_DIR = Path("~/Projects/VelaNova/models").expanduser()
+MODELS_DIR = PROJECT_ROOT / "models"
 
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 DATA_DIR.mkdir(parents=True, exist_ok=True)
