@@ -10,7 +10,6 @@ Enhanced Features:
 - Actual audio capture with PyAudio/sounddevice
 - OpenWakeWord integration for wake detection
 - Embedding-based semantic search (sentence-transformers)
-import re
 - Multi-turn conversation state tracking
 - Enhanced local intent handling
 - Conversation context window management
@@ -1200,23 +1199,6 @@ class TTS:
 
         except Exception as e:
             self.logger.error("tts_failed %s", json.dumps({"error": str(e)}))
-            return False
-    def _check_interrupt(self) -> bool:
-        """Check for interrupt signal by monitoring microphone for loud audio."""
-        if not sd:
-            return False
-        try:
-            # Quick 100ms audio sample
-            audio = sd.rec(int(0.1 * 16000), samplerate=16000, channels=1, dtype="int16")
-            sd.wait()
-            # Calculate RMS volume
-            rms = np.sqrt(np.mean(audio.astype(np.float32) ** 2)) / 32768.0
-            # If user is speaking loudly (above threshold), interrupt
-            if rms > 0.05:
-                self.logger.info("tts_interrupted %s", json.dumps({"rms": round(rms, 4)}))
-                return True
-            return False
-        except Exception:
             return False
     def stop(self):
         """Stop current playback."""
