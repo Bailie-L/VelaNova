@@ -72,7 +72,7 @@ graph TD
 ## Quick Start
 ```bash
 # 1. Clone and set up
-git clone https://github.com/YOUR_USERNAME/VelaNova.git
+git clone https://github.com/Bailie-L/VelaNova.git
 cd VelaNova
 python3 -m venv .venv
 source .venv/bin/activate
